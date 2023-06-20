@@ -75,7 +75,7 @@ public class loginActivity extends AppCompatActivity {
                     sEmail.setError("Field can't be empty!");
                 } else if (newPass.isEmpty()) {
                     sPass.setError("Field can't be empty!");
-                } else if (newPass.length() < 8) {
+                } else if (newPass.length() < 6) {
                     sPass.setError("Enter at least 8 characters or digits!!");
                 }
                 else {
@@ -139,13 +139,16 @@ public class loginActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         reff = database.getReference();
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        String userId = user.getUid();
         reff.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                if (dataSnapshot.child(parentDbName).child(newEmail).exists())
+                if (dataSnapshot.child(parentDbName).child(userId).exists())
                 {
-                    Users usersData = dataSnapshot.child(parentDbName).child(newEmail).getValue(Users.class);
+                    Users usersData = dataSnapshot.child(parentDbName).child(userId).getValue(Users.class);
 
                     if (usersData.getEmail().equals(newEmail))
                     {

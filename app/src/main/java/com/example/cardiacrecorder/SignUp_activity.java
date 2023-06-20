@@ -33,8 +33,7 @@ public class SignUp_activity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseUser user;
-    private EditText sEmail, sPass, sUser, sConfirmpass,sHeight,sWeight;
-    private RadioGroup radiogroup;
+    private EditText sEmail, sPass, sUser, sConfirmpass,sHeight,sWeight,sGender;
     private Button sBtn;
     private TextView loginText;
     ProgressDialog proDiag;
@@ -56,7 +55,7 @@ public class SignUp_activity extends AppCompatActivity {
         sPass = findViewById(R.id.admininputuserpassword2);
         sHeight = findViewById(R.id.admininputuserheight);
         sWeight = findViewById(R.id.admininputuserweight);
-        radiogroup = findViewById(R.id.admininputusergender);
+        sGender = findViewById(R.id.admininputgender);
         sBtn = findViewById(R.id.buttonnewregisteradmin);
         loginText = findViewById(R.id.alreadyhaveaccount);
         proDiag = new ProgressDialog(this);
@@ -73,15 +72,7 @@ public class SignUp_activity extends AppCompatActivity {
                 String newConfirmPass = sConfirmpass.getText().toString().trim();
                 String newHeight = sHeight.getText().toString().trim();
                 String newWeight = sWeight.getText().toString().trim();
-                String newGender ;
-                radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        RadioButton radioButton = findViewById(checkedId);
-                        String sGender = radioButton.getText().toString();
-                        //newGender.setText(sGender);
-                    }
-                });
+                String newGender =sGender.getText().toString().trim();
 
                 if (newUser.isEmpty()) {
                     sUser.setError("Field can't be empty!");
@@ -91,7 +82,7 @@ public class SignUp_activity extends AppCompatActivity {
                     sEmail.setError("Enter Correct Email");
                 } else if (newPass.isEmpty()) {
                     sPass.setError("Field can't be empty!");
-                } else if (newPass.length() < 8) {
+                } else if (newPass.length() < 6) {
                     sPass.setError("Enter at least 8 characters or digits!!");
                 } else if (newConfirmPass.isEmpty()) {
                     sConfirmpass.setError("Field can't be empty!");
@@ -99,9 +90,9 @@ public class SignUp_activity extends AppCompatActivity {
                     sHeight.setError("Field can't be empty!");
                 } else if (newWeight.isEmpty()) {
                     sWeight.setError("Field can't be empty!");
-                } //else if (newGender.isEmpty()) {
-                  //  radiobutton.setError("Field can't be empty!");
-                //}
+                } else if (newGender.isEmpty()) {
+                   sGender.setError("Field can't be empty!");
+                }
                 else if (!newConfirmPass.equals(newPass)) {
                     sConfirmpass.setError("Password doesn't match!!");
                 } else if (newEmail.isEmpty()) {
@@ -119,6 +110,13 @@ public class SignUp_activity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = auth.getCurrentUser();
+                                if (user != null) {
+                                    String userId = user.getUid();
+                                    ValidateEmail(newUser, newEmail, newPass, newHeight, newWeight, newGender, userId);
+                                } else {
+                                    proDiag.dismiss();
+                                    Toast.makeText(SignUp_activity.this, "Failed to create user.", Toast.LENGTH_SHORT).show();
+                                }
                             }
                             else{
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -127,8 +125,7 @@ public class SignUp_activity extends AppCompatActivity {
                             }
                         }
                     });
-
-                    //ValidatePhoneNumber(newUser,newEmail,newPass,newConfirmPass,newHeight,newWeight, newGender);
+                    //ValidateEmail(newUser,newEmail,newPass,newHeight,newWeight, newGender);
 
                 }
             }
@@ -148,16 +145,19 @@ public class SignUp_activity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void ValidatePhoneNumber(String newUser, String newEmail, String newPass, String newConfirmPass, String newHeight,
-                                     String newWeight, String newGender)
+    private void ValidateEmail(String newUser, String newEmail, String newPass, String newHeight,
+                                     String newWeight, String newGender, String userId)
     {
         database = FirebaseDatabase.getInstance();
         reff = database.getReference();
+        //FirebaseUser user=auth.getCurrentUser();
+       // String userId = user.getUid();
+
 
         reff.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(!(snapshot.child("Users").child(newEmail).exists())) {
+                if (!(snapshot.child("Users").child(userId).exists())) {
                     HashMap<String, Object> userdataMap = new HashMap<>();
                     userdataMap.put("Email", newEmail);
                     userdataMap.put("Username", newUser);
@@ -167,7 +167,7 @@ public class SignUp_activity extends AppCompatActivity {
                     userdataMap.put("Gender", newGender);
 
 
-                    reff.child("Users").child(newEmail).updateChildren(userdataMap)
+                    reff.child("Users").child(userId).updateChildren(userdataMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
