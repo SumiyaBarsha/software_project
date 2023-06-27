@@ -13,19 +13,19 @@ public class EachData implements Serializable {
     @Exclude
     private String pushId;
 
-    private final long timestamp;
+    private long timestamp;
 
     @NonNull
-    private final String date; //dd-mm-yyyy
+    private String date; //dd-mm-yyyy
 
     @NonNull
-    private final String time; // hh:mma
+    private String time; // hh:mma
 
-    private final int sysPressure; // mm Hg - non-negative
-    private final int dysPressure; // mm Hg - non-negative
-    private final int heartRate; // beats per minute non-negative
+    private int sysPressure; // mm Hg - non-negative
+    private int dysPressure; // mm Hg - non-negative
+    private int heartRate; // beats per minute non-negative
     @Nullable
-    private final String comment;
+    private String comment;
 
     public EachData(String pushId, long timestamp, @NonNull String date, @NonNull String time, int sysPressure,
                     int dysPressure, int heartRate, @Nullable String comment) {
@@ -36,6 +36,36 @@ public class EachData implements Serializable {
         this.sysPressure = sysPressure;
         this.dysPressure = dysPressure;
         this.heartRate = heartRate;
+        this.comment = comment;
+    }
+
+    public EachData() {}
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setDate(@NonNull String date) {
+        this.date = date;
+    }
+
+    public void setTime(@NonNull String time) {
+        this.time = time;
+    }
+
+    public void setSysPressure(int sysPressure) {
+        this.sysPressure = sysPressure;
+    }
+
+    public void setDysPressure(int dysPressure) {
+        this.dysPressure = dysPressure;
+    }
+
+    public void setHeartRate(int heartRate) {
+        this.heartRate = heartRate;
+    }
+
+    public void setComment(@Nullable String comment) {
         this.comment = comment;
     }
 

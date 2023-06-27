@@ -128,7 +128,6 @@ public class AddUpdateActivity extends AppCompatActivity {
         }
     }
 
-
     private void setPassedData(@NonNull EachData data){
         binding.tvDate.setText(data.getDate());
         binding.tvTime.setText(data.getTime());

@@ -15,5 +15,6 @@
     <color name="lavender">#8692F7</color>
     <color name="deepskyblue">#00BFFF</color>
     <color name="very_light_green">#D5E3FF</color>
+    <color name="very_light_blue">#DCADFF</color>
     <color name="sky_blue">#9AFFDC</color>
 </resources>
