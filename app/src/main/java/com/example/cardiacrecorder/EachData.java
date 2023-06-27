@@ -133,4 +133,30 @@ public class EachData implements Serializable {
 
     }
 
+    /**
+     * formats Dys Pressure
+     * @return Dys pressure with unit
+     */
+    @Exclude
+    public String getFormattedDysPressure(){
+        return dysPressure+"mm Hg";
+    }
+    /**
+     * formats Heart Rate
+     * @return Heart Rate with unit
+     */
+    @Exclude
+    public String getFormattedHeartRate(){
+        return heartRate+"BPM";
+    }
+
+    /**
+     * formats Sys Pressure
+     * @return Sys pressure with unit
+     */
+    @Exclude
+    public String getFormattedSysPressure(){
+        return sysPressure+"mm Hg";
+    }
+
 }

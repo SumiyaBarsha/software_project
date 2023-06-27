@@ -21,9 +21,9 @@ public class DetailsActivity extends AppCompatActivity {
             EachData data = (EachData)obj;
             binding.tvDate.setText(data.getDate());
             binding.tvTime.setText(data.getTime());
-            binding.tvSysPressure.setText(getString(R.string.int_ph,data.getSysPressure()));
-            binding.tvDysPressure.setText(getString(R.string.int_ph,data.getDysPressure()));
-            binding.tvHeartRate.setText(getString(R.string.int_ph,data.getHeartRate()));
+            binding.tvSysPressure.setText(data.getFormattedSysPressure());
+            binding.tvDysPressure.setText(data.getFormattedDysPressure());
+            binding.tvHeartRate.setText(data.getFormattedHeartRate());
             binding.tvComment.setText(data.getComment());
         }
     }

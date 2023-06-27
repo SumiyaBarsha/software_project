@@ -34,4 +34,46 @@ public class EachDataTest {
         Assert.assertFalse(isSame2);
     }
 
+
+    @Test
+    public void testGetFormattedSysPressure() {
+        String id = "1";
+        long timestamp = System.currentTimeMillis();
+        String date = "01-01-2023";
+        String time = "12:00AM";
+        int sysPressure = 120;
+        int dysPressure = 80;
+        int heartRate = 70;
+        String comment = "Sample comment";
+
+        EachData data = new EachData(id, timestamp, date, time, sysPressure, dysPressure, heartRate, comment);
+
+        Assert.assertEquals("120mm Hg", data.getFormattedSysPressure());
+    }
+
+    @Test
+    public void testGetFormattedDysPressure() {
+        int dysPressure = 80;
+
+        EachData eachData = new EachData("1", 123456789, "01-01-2022", "12:00AM", 120, dysPressure, 70, "Comment");
+
+        String expectedFormattedDysPressure = dysPressure + "mm Hg";
+        String formattedDysPressure = eachData.getFormattedDysPressure();
+
+        Assert.assertEquals(expectedFormattedDysPressure, formattedDysPressure);
+    }
+
+
+    @Test
+    public void testGetFormattedHeartRate() {
+        int heartRate = 80;
+
+        EachData eachData = new EachData("1", 123456789, "01-01-2022", "12:00AM", 120, 70, heartRate, "Comment");
+
+        String expectedText = heartRate + "BPM";
+        String formattedHeartRate = eachData.getFormattedHeartRate();
+
+        Assert.assertEquals(expectedText, formattedHeartRate);
+    }
+
 }
