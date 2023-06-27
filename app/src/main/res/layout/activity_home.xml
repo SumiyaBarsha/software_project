@@ -45,5 +45,4 @@
         app:layout_constraintStart_toStartOf="parent"
         android:contentDescription="@string/add_measurement" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
