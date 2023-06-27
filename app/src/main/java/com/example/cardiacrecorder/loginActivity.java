@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -158,6 +159,10 @@ public class loginActivity extends AppCompatActivity {
                                 proDiag.dismiss();
 
                                 Intent intent = new Intent(loginActivity.this, HomeActivity.class);
+                                SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putBoolean("amILoggedIn",true);
+                                editor.apply();
                                 // Prevalent.currentOnlineUser = usersData;
                                 startActivity(intent);
                             }

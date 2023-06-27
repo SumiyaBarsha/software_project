@@ -3,6 +3,7 @@ package com.example.cardiacrecorder;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -36,7 +37,12 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
+
                 Intent intent = new Intent(SplashActivity.this,loginActivity.class);
+                if(sp.getBoolean("amILoggedIn",false)){
+                    intent = new Intent(SplashActivity.this,HomeActivity.class);
+                }
                 startActivity(intent);
                 finish();
             }
