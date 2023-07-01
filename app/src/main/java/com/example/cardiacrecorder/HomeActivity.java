@@ -2,9 +2,12 @@ package com.example.cardiacrecorder;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -59,7 +63,29 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+       Toolbar toolbar = findViewById(R.id.toolbar);
+       setSupportActionBar(toolbar);
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.logout) {
+            logout();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void deleteData(String pushId){
         if(pushId == null){
@@ -78,6 +104,7 @@ public class HomeActivity extends AppCompatActivity {
         ref.removeValue().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 Toast.makeText(HomeActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+
             }
             else{
                 Toast.makeText(HomeActivity.this, "Failed to delete", Toast.LENGTH_SHORT).show();
@@ -92,6 +119,9 @@ public class HomeActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user == null){
             Toast.makeText(this, "You are not signed in", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomeActivity.this,loginActivity.class);
+            startActivity(intent);
+            finish();
             return;
         }
 
@@ -130,6 +160,13 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void logout()
+    {
+        //FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(HomeActivity.this, loginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

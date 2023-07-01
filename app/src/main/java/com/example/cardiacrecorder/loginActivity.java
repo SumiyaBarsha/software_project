@@ -19,7 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -121,6 +124,29 @@ public class loginActivity extends AppCompatActivity {
                         });
                     }
                 });
+                dialogView.findViewById(R.id.btnReset).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String userEmail = emailBox.getText().toString();
+                        if (TextUtils.isEmpty(userEmail) || !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
+                            Toast.makeText(loginActivity.this, "Enter your registered email id", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        auth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(loginActivity.this, "Check your email", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                } else {
+                                    Toast.makeText(loginActivity.this, "Unable to send, failed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+
+
+            });
                 dialogView.findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -138,52 +164,26 @@ public class loginActivity extends AppCompatActivity {
 
     private void AccessAccount(String newEmail, String newPass) {
 
-        database = FirebaseDatabase.getInstance();
-        reff = database.getReference();
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        String userId = user.getUid();
-        reff.addListenerForSingleValueEvent(new ValueEventListener() {
+        auth.signInWithEmailAndPassword(newEmail,newPass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-            {
-                if (dataSnapshot.child(parentDbName).child(userId).exists())
-                {
-                    Users usersData = dataSnapshot.child(parentDbName).child(userId).getValue(Users.class);
-
-                    if (usersData.getEmail().equals(newEmail))
-                    {
-                        if (usersData.getPassword().equals(newPass)) {
-                            if (parentDbName.equals("Users")) {
-                                Toast.makeText(loginActivity.this, "logged in Successfully...", Toast.LENGTH_SHORT).show();
-                                proDiag.dismiss();
-
-                                Intent intent = new Intent(loginActivity.this, HomeActivity.class);
-                                SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sp.edit();
-                                editor.putBoolean("amILoggedIn",true);
-                                editor.apply();
-                                // Prevalent.currentOnlineUser = usersData;
-                                startActivity(intent);
-                            }
-                        }
-                        else
-                        {
-                            proDiag.dismiss();
-                            Toast.makeText(loginActivity.this, "Password is incorrect.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-                else
-                {
-                    Toast.makeText(loginActivity.this, "Account does not exist!", Toast.LENGTH_SHORT).show();
-                    proDiag.dismiss();
-                }
+            public void onSuccess(AuthResult authResult) {
+                Toast.makeText(loginActivity.this, "logged in Successfully...", Toast.LENGTH_SHORT).show();
+                proDiag.dismiss();
+                Intent intent = new Intent(loginActivity.this, HomeActivity.class);
+                SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putBoolean("amILoggedIn",true);
+                editor.apply();
+                // Prevalent.currentOnlineUser = usersData;
+                startActivity(intent);
+                finish();
             }
-
+        }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(loginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

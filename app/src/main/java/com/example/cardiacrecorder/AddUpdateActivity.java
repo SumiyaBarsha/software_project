@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.cardiacrecorder.classes.MyDatePicker;
 import com.example.cardiacrecorder.classes.MyTimePicker;
@@ -41,6 +42,8 @@ public class AddUpdateActivity extends AppCompatActivity {
             passedData = (EachData)obj;
             setPassedData(passedData);
         }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
     }
 
@@ -135,6 +138,7 @@ public class AddUpdateActivity extends AppCompatActivity {
         binding.editTextDysPressure.setText(getString(R.string.int_ph,data.getDysPressure()));
         binding.editTextHeartRate.setText(getString(R.string.int_ph,data.getHeartRate()));
         binding.editTextComment.setText(data.getComment());
+        binding.tvStatus.setText(data.getStatus());
         binding.buttonSave.setText(getString(R.string.update));
     }
 
@@ -149,6 +153,7 @@ public class AddUpdateActivity extends AppCompatActivity {
         String dys = String.valueOf(binding.editTextDysPressure.getText()).trim();
         String hRate = String.valueOf(binding.editTextHeartRate.getText()).trim();
         String comment = String.valueOf(binding.editTextComment.getText()).trim();
+        //String status = String.valueOf(binding.tvStatus.getText()).trim();
 
         if(!isValid(date,time,sys,dys,hRate)){
             Toast.makeText(this, "Fill all forms", Toast.LENGTH_SHORT).show();
@@ -164,7 +169,7 @@ public class AddUpdateActivity extends AppCompatActivity {
             rate = Integer.parseInt(hRate);
         }catch (Exception ignored){}
 
-
+        String status = determineStatus(sysP, dysP);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -183,7 +188,7 @@ public class AddUpdateActivity extends AppCompatActivity {
 
         if(pushId == null) pushId = passedData.getPushId();
 
-        EachData data = new EachData(pushId,System.currentTimeMillis(),date,time,sysP,dysP,rate,comment);
+        EachData data = new EachData(pushId,System.currentTimeMillis(),date,time,sysP,dysP,rate,comment, status);
 
         ref.child(pushId).setValue(data).addOnCompleteListener(task -> {
             binding.progressBar.setVisibility(View.INVISIBLE);
@@ -191,6 +196,9 @@ public class AddUpdateActivity extends AppCompatActivity {
             if(task.isSuccessful()){
                 Toast.makeText(AddUpdateActivity.this,message, Toast.LENGTH_SHORT).show();
                 clearAll();
+                Intent intent = new Intent(AddUpdateActivity.this,HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
             else{
                 Toast.makeText(AddUpdateActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -198,6 +206,25 @@ public class AddUpdateActivity extends AppCompatActivity {
         });
 
     }
+
+
+    private String determineStatus(int sysPressure, int dysPressure) {
+        // Logic to determine the status based on systolic and diastolic pressures
+        if (sysPressure < 120 && dysPressure < 80) {
+            return "Normal";
+        } else if (sysPressure >= 120 && sysPressure <= 129 && dysPressure < 80) {
+            return "Elevated";
+        } else if (sysPressure >= 130 && sysPressure <= 139 || dysPressure >= 80 && dysPressure <= 89) {
+            return "Stage 1 Hypertension";
+        } else if (sysPressure >= 140 && sysPressure <= 180 || dysPressure >= 90 && dysPressure <= 120) {
+            return "Stage 2 Hypertension";
+        } else if (sysPressure > 180 || dysPressure > 120) {
+            return "Hypertensive Crisis";
+        } else {
+            return "Unknown";
+        }
+    }
+
 
     private boolean isValid(String ...values){
         for(String val : values){
@@ -207,11 +234,13 @@ public class AddUpdateActivity extends AppCompatActivity {
     }
 
     private void clearAll(){
+        binding.tvDate.setText(null);
         binding.tvTime.setText(null);
         binding.editTextSysPressure.setText(null);
         binding.editTextDysPressure.setText(null);
         binding.editTextHeartRate.setText(null);
         binding.editTextComment.setText(null);
+       // binding.tvStatus.setText(null);
     }
 
 }

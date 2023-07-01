@@ -5,14 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.cardiacrecorder.databinding.ActivityDetaislBinding;
+import com.example.cardiacrecorder.databinding.ActivityDetailsBinding;
 
 public class DetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityDetaislBinding binding = ActivityDetaislBinding.inflate(getLayoutInflater());
+        ActivityDetailsBinding binding = ActivityDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         Intent intent = getIntent();

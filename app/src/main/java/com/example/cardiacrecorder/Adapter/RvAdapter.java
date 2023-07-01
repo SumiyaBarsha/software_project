@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,10 +48,13 @@ public class RvAdapter extends ListAdapter<EachData,RvAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         EachData curItem = getItem(position);
 
-        holder.tvDateTime.setText(context.getString(R.string.date_n_time_ph,curItem.getDate(),curItem.getTime()));
+        holder.tvDate.setText(curItem.getDate());
+        holder.tvTime.setText(curItem.getTime());
         holder.tvSysPressure.setText(context.getString(R.string.sys_ph,curItem.getSysPressure()));
         holder.tvDysPressure.setText(context.getString(R.string.sys_ph,curItem.getDysPressure()));
         holder.tvHeartRate.setText(context.getString(R.string.heart_rate_ph,curItem.getHeartRate()));
+        holder.tvComment.setText(curItem.getComment());
+        holder.tvStatus.setText(curItem.getStatus());
 
         holder.tvDelete.setOnClickListener(view-> listener.onDeleteRequest(getItem(holder.getAdapterPosition())));
         holder.tvEdit.setOnClickListener(view-> listener.onEditRequest(getItem(holder.getAdapterPosition())));
@@ -68,15 +72,18 @@ public class RvAdapter extends ListAdapter<EachData,RvAdapter.ViewHolder> {
      * ViewHolder Class
      */
     static class ViewHolder extends RecyclerView.ViewHolder{
-        private final TextView tvDateTime, tvSysPressure, tvDysPressure, tvHeartRate;
-        private final TextView tvEdit, tvDelete;
+        private final TextView tvDate, tvTime, tvSysPressure, tvDysPressure, tvHeartRate, tvComment, tvStatus;
+        private final ImageButton tvEdit, tvDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvDateTime = itemView.findViewById(R.id.tvDateTime);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            tvTime = itemView.findViewById(R.id.tvTime);
             tvSysPressure = itemView.findViewById(R.id.tvSysPressure);
             tvDysPressure = itemView.findViewById(R.id.tvDysPressure);
             tvHeartRate = itemView.findViewById(R.id.tvHeartRate);
+            tvComment = itemView.findViewById(R.id.tvComment);
+            tvStatus = itemView.findViewById(R.id.tvStatus);
 
             tvEdit = itemView.findViewById(R.id.tvEdit);
             tvDelete = itemView.findViewById(R.id.tvDelete);

@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context=".DetailsActivity">
+    tools:context=".DetailsActivity"
+    android:background="@color/white">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,7 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/teal_700">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -30,7 +32,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"
+                    android:background="@color/holo_dark_blue"
                     android:orientation="vertical">
 
                     <TextView
@@ -41,11 +43,11 @@
                         android:layout_marginBottom="8dp"
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="4dp"
-                        android:background="@color/very_light_blue"
+                        android:background="@color/white"
                         android:hint="@string/date_dd_mm_yyyy"
                         android:minHeight="45dp"
                         android:padding="8dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/holo_dark_blue"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -61,7 +63,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"
+                    android:background="@color/holo_dark_blue"
                     android:orientation="vertical">
 
                     <TextView
@@ -72,11 +74,11 @@
                         android:layout_marginBottom="8dp"
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="4dp"
-                        android:background="@color/very_light_blue"
+                        android:background="@color/white"
                         android:hint="@string/time_hh_mma"
                         android:minHeight="45dp"
                         android:padding="8dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/holo_dark_blue"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -92,7 +94,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"
+                    android:background="@color/holo_dark_blue"
                     android:orientation="vertical">
 
                     <TextView
@@ -103,11 +105,11 @@
                         android:layout_marginBottom="8dp"
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="4dp"
-                        android:background="@color/very_light_blue"
+                        android:background="@color/white"
                         android:hint="@string/systolic_pressure"
                         android:minHeight="45dp"
                         android:padding="8dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/holo_dark_blue"
                         android:textSize="18sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -122,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
-                    android:background="@color/white"
+                    android:background="@color/holo_dark_blue"
 
                     android:orientation="vertical">
 
@@ -134,11 +136,11 @@
                         android:layout_marginBottom="8dp"
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="4dp"
-                        android:background="@color/very_light_blue"
+                        android:background="@color/white"
                         android:hint="@string/diastolic_pressure"
                         android:minHeight="45dp"
                         android:padding="8dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/holo_dark_blue"
                         android:textSize="18sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -152,7 +154,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"
+                    android:background="@color/holo_dark_blue"
                     android:orientation="vertical">
 
                     <TextView
@@ -163,11 +165,11 @@
                         android:layout_marginBottom="8dp"
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="4dp"
-                        android:background="@color/very_light_blue"
+                        android:background="@color/white"
                         android:hint="@string/heart_rate"
                         android:minHeight="45dp"
                         android:padding="8dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/holo_dark_blue"
                         android:textSize="18sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -181,7 +183,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"
+                    android:background="@color/holo_dark_blue"
                     android:orientation="vertical">
 
                     <TextView
@@ -192,12 +194,12 @@
                         android:layout_marginBottom="8dp"
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="4dp"
-                        android:background="@color/very_light_blue"
+                        android:background="@color/white"
                         android:hint="@string/enter_any_message"
                         android:minHeight="45dp"
                         android:minLines="2"
                         android:padding="8dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/holo_dark_blue"
                         android:textSize="18sp" />
                 </LinearLayout>
 

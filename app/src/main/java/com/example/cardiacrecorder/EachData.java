@@ -26,9 +26,10 @@ public class EachData implements Serializable {
     private int heartRate; // beats per minute non-negative
     @Nullable
     private String comment;
+    private String status;
 
     public EachData(String pushId, long timestamp, @NonNull String date, @NonNull String time, int sysPressure,
-                    int dysPressure, int heartRate, @Nullable String comment) {
+                    int dysPressure, int heartRate, @Nullable String comment, @Nullable String status) {
         this.pushId = pushId;
         this.timestamp = timestamp;
         this.date = date;
@@ -37,6 +38,7 @@ public class EachData implements Serializable {
         this.dysPressure = dysPressure;
         this.heartRate = heartRate;
         this.comment = comment;
+        this.status = status;
     }
 
     public EachData() {}
@@ -67,6 +69,10 @@ public class EachData implements Serializable {
 
     public void setComment(@Nullable String comment) {
         this.comment = comment;
+    }
+
+    public void setStatus(@Nullable String status) {
+        this.status = status;
     }
 
     public String getPushId() {
@@ -107,6 +113,8 @@ public class EachData implements Serializable {
     public String getComment() {
         return comment;
     }
+
+    public String getStatus() { return status; }
 
     /**
      * check if two item ids are same
