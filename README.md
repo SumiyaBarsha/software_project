@@ -18,6 +18,12 @@ Here are some screenshots of <b>Cardiac Recorder</b> App:
 ![rsz_1add2](https://github.com/SumiyaBarsha/software_project/assets/74502973/1b183910-789d-4123-b606-0b9bbcead2a3)
 ![rsz_1deleterecord](https://github.com/SumiyaBarsha/software_project/assets/74502973/47c3a97e-33b5-45ab-89e3-00b4eb3164f4)
 ![rsz_logout](https://github.com/SumiyaBarsha/software_project/assets/74502973/d6a4e710-ebdf-438c-ba28-3481d169210b)
+<br>
+<br>
+<h1>Mock Up :</h1>
+
+![rsz_untitled_design3](https://github.com/SumiyaBarsha/software_project/assets/74502973/49ca3acf-9808-4a4e-8b6e-7019abfdd127)
+
 
 More details can be found <a href="https://github.com/SumiyaBarsha/software_project/wiki">here</a>
 
