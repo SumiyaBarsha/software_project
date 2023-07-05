@@ -166,6 +166,7 @@ public class HomeActivity extends AppCompatActivity {
     public void logout()
     {
         FirebaseAuth.getInstance().signOut();
+<<<<<<< HEAD
         //SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
 
         SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
@@ -173,6 +174,8 @@ public class HomeActivity extends AppCompatActivity {
         editor.putBoolean("amILoggedIn",false);
         editor.apply();
 
+=======
+>>>>>>> cf96e09cdf10100a889436740f0725e0e785fdb8
         Intent intent = new Intent(HomeActivity.this, loginActivity.class);
         startActivity(intent);
         finish();
