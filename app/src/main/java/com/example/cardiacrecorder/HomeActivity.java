@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -161,9 +162,17 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
     public void logout()
     {
         FirebaseAuth.getInstance().signOut();
+        //SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
+
+        SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("amILoggedIn",false);
+        editor.apply();
+
         Intent intent = new Intent(HomeActivity.this, loginActivity.class);
         startActivity(intent);
         finish();

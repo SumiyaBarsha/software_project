@@ -33,6 +33,56 @@ public class EachDataTest {
         Assert.assertTrue(isSame1);
         Assert.assertFalse(isSame2);
     }
+    @Test
+    public void testGetTimestamp(){
+        EachData eachData = new EachData("1", 123456789, "01-01-2022", "12:00AM", 120, 80, 70, "Comment","Status");
+
+        Assert.assertEquals(123456789,eachData.getTimestamp());
+
+    }
+
+
+
+
+
+    @Test
+    public void testGetSystolic(){
+        EachData eachData = new EachData("1", 123456789, "01-01-2022", "12:00AM", 120, 80, 70, "Comment","Status");
+
+        Assert.assertEquals(120,eachData.getSysPressure());
+    }
+
+    @Test
+    public void testGetDysPressure(){
+        EachData eachData = new EachData("1", 123456789, "01-01-2022", "12:00AM", 120, 80, 70, "Comment","Status");
+
+        Assert.assertEquals(80,eachData.getDysPressure());
+    }
+
+    @Test
+    public void testGetTime() {
+        EachData eachData = new EachData("1", 123456789, "01-01-2022", "12:00AM", 120, 80, 70, "Comment","Status");
+
+        Assert.assertEquals("12:00AM",eachData.getTime());
+    }
+    @Test
+    public void testGetHeartRate() {
+        EachData eachData = new EachData("1", 123456789, "01-01-2022", "12:00AM", 120, 80, 70, "Comment","Status");
+
+        Assert.assertEquals(70,eachData.getHeartRate());
+    }
+    @Test
+    public void testGetComment() {
+        EachData eachData = new EachData("1", 123456789, "01-01-2022", "12:00AM", 120, 80, 70, "Comment","Status");
+
+        Assert.assertEquals("Comment",eachData.getComment());
+    }
+    @Test
+    public void testGetStatus() {
+        EachData eachData = new EachData("1", 123456789, "01-01-2022", "12:00AM", 120, 80, 70, "Comment","Status");
+
+        Assert.assertEquals("Status",eachData.getStatus());
+    }
 
 
     @Test
@@ -76,5 +126,107 @@ public class EachDataTest {
 
         Assert.assertEquals(expectedText, formattedHeartRate);
     }
+    @Test
+    public void testGetDate() {
+        EachData eachData = new EachData("1", 123456789, "01-01-2022", "12:00AM", 120, 80, 70, "Comment","Status");
 
+        Assert.assertEquals("01-01-2022",eachData.getDate());
+    }
+    @Test
+    public void testSetTimestamp() {
+        EachData eachData = new EachData();
+        long expectedTimestamp = 1234567890L; // Replace with the expected timestamp value
+
+        eachData.setTimestamp(expectedTimestamp);
+
+        long actualTimestamp = eachData.getTimestamp(); // Assuming there's a getter method to retrieve the timestamp
+        Assert.assertEquals(expectedTimestamp, actualTimestamp);
+    }
+
+    @Test
+    public void testSetDate() {
+        EachData eachData = new EachData();
+        String expectedDate = "2023-07-05"; // Replace with the expected date value
+
+        eachData.setDate(expectedDate);
+
+        String actualDate = eachData.getDate();
+        Assert.assertEquals(expectedDate, actualDate);
+    }
+
+    @Test
+    public void testSetTime() {
+        EachData eachData = new EachData();
+        String expectedTime = "09:30:00"; // Replace with the expected time value
+
+        eachData.setTime(expectedTime);
+
+        String actualTime = eachData.getTime();
+        Assert.assertEquals(expectedTime, actualTime);
+    }
+
+    @Test
+    public void testSetSysPressure() {
+        EachData eachData = new EachData();
+        int expectedSysPressure = 120; // Replace with the expected systolic pressure value
+
+        eachData.setSysPressure(expectedSysPressure);
+
+        int actualSysPressure = eachData.getSysPressure();
+        Assert.assertEquals(expectedSysPressure, actualSysPressure);
+    }
+
+    @Test
+    public void testSetDysPressure() {
+        EachData eachData = new EachData();
+        int expectedDysPressure = 80; // Replace with the expected diastolic pressure value
+
+        eachData.setDysPressure(expectedDysPressure);
+
+        int actualDysPressure = eachData.getDysPressure();
+        Assert.assertEquals(expectedDysPressure, actualDysPressure);
+    }
+
+    @Test
+    public void testSetHeartRate() {
+        EachData eachData = new EachData();
+        int expectedHeartRate = 80; // Replace with the expected heart rate value
+
+        eachData.setHeartRate(expectedHeartRate);
+
+        int actualHeartRate = eachData.getHeartRate();
+        Assert.assertEquals(expectedHeartRate, actualHeartRate);
+    }
+
+    @Test
+    public void testSetComment() {
+        EachData eachData = new EachData();
+        String expectedComment = "This is a comment."; // Replace with the expected comment value
+
+        eachData.setComment(expectedComment);
+
+        String actualComment = eachData.getComment();
+        Assert.assertEquals(expectedComment, actualComment);
+    }
+
+    @Test
+    public void testSetStatus() {
+        EachData eachData = new EachData();
+        String expectedStatus = "Normal"; // Replace with the expected status value
+
+        eachData.setStatus(expectedStatus);
+
+        String actualStatus = eachData.getStatus();
+        Assert.assertEquals(expectedStatus, actualStatus);
+    }
+    @Test
+    public void testSetPushId() {
+        EachData eachData = new EachData();
+        String expectedPushId = "ABC123"; // Replace with the expected pushId value
+
+        eachData.setPushId(expectedPushId);
+
+        String actualPushId = eachData.getPushId();
+        Assert.assertEquals(expectedPushId, actualPushId);
+    }
 }
