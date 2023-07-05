@@ -22,7 +22,8 @@ Here are some screenshots of <b>Cardiac Recorder</b> App:
 <br>
 <h1>Mock Up :</h1>
 
-![rsz_untitled_design3](https://github.com/SumiyaBarsha/software_project/assets/74502973/49ca3acf-9808-4a4e-8b6e-7019abfdd127)
+![rsz_sumiyabarshasoftware_project1](https://github.com/SumiyaBarsha/software_project/assets/74502973/922a5121-8524-4fd5-8486-170c1aa37521)
+
 
 
 More details can be found <a href="https://github.com/SumiyaBarsha/software_project/wiki">here</a>
