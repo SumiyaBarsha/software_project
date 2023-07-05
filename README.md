@@ -5,6 +5,7 @@ This app keeps records of heart health  and thus can be helpful for proper treat
 <br>
 Here are some screenshots of <b>Cardiac Recorder</b> App:
 <br>
+<img src="https://github.com/SumiyaBarsha/software_project/commit/3e1571b134444530e6ed698b180674ac63e7557e#commitcomment-120739059" height="250px" width="200px">
 
  
 
