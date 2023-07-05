@@ -138,7 +138,6 @@ public class EachData implements Serializable {
 
         return (timestamp == item.timestamp) && (date.equals(item.date)) && (time.equals(item.time)) &&
                 (sysPressure == item.sysPressure) && (dysPressure == item.dysPressure) && (heartRate == item.heartRate) && commentCheck;
-
     }
 
     /**
