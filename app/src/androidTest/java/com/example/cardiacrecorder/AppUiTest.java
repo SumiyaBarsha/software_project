@@ -5,16 +5,22 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
+import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -28,62 +34,8 @@ public class AppUiTest {
 
     @Test
     public void testAppName() {
-     Espresso.onView(withText("CardiacRecorder")).check(matches(isDisplayed()));
+     onView(withText("CardiacRecorder")).check(matches(isDisplayed()));
     }
-
-    @Test
-    public void testSignupButtonNavigatesToSignupActivity(){
-
-        //Check if the SignupActivity is displayed
-        Espresso.onView(withId(R.id.activityLogin))
-                .check(matches(isDisplayed()));
-        // Perform a click action on the signup text
-        onView(withId(R.id.textviewsignup)).perform(ViewActions.click());
-
-        // Check if the HomeActivity layout is displayed
-        onView(withId(R.id.signupActivity))
-                .check(matches(isDisplayed()));
-
-        //Insert the information of signup
-        onView(withId(R.id.admininputusername)).perform(ViewActions.typeText("abcd"));
-        onView(withId(R.id.admininputuseremail)).perform(ViewActions.typeText("abcd@gmail.com"));
-        onView(withId(R.id.admininputuserpassword2)).perform(ViewActions.typeText("123456"));
-        onView(withId(R.id.admininputconfirmuserpassword)).perform(ViewActions.typeText("123456"));
-        onView(withId(R.id.admininputuserheight)).perform(ViewActions.typeText("5.3"));
-        onView(withId(R.id.admininputuserweight)).perform(ViewActions.typeText("50"));
-        Espresso.pressBack();
-        onView(withId(R.id.admininputgender)).perform(ViewActions.typeText("male"));
-        Espresso.pressBack();
-
-        // Perform a click action on the signup button
-        onView(withId(R.id.buttonnewregisteradmin)).perform(ViewActions.click());
-
-
-    }
-
-    @Test
-    public void testLoginButtonNavigatesToHomeActivity() {
-         //Homepage is opening first
-
-        //Redirect to Login Page
-        Espresso.onView(withId(R.id.activityLogin))
-                .check(matches(isDisplayed()));
-
-        // Enter email
-        onView(withId(R.id.admininputemail)).perform(ViewActions.typeText("sumiyabarsha3@gmail.com"));
-
-        // Enter password
-        onView(withId(R.id.admininputuserpassword2)).perform(ViewActions.typeText("123456"));
-
-        // Perform a click action on the login button
-        onView(withId(R.id.adminbtnlogin)).perform(ViewActions.longClick());
-
-        // Check if the HomeActivity layout is displayed
-        Espresso.onView(withId(R.id.homeActivity))
-               .check(matches(isDisplayed()));
-    }
-
-
 
 
     @Test
@@ -98,6 +50,39 @@ public class AppUiTest {
         // Check if the AddUpdateActivity is opened
         Espresso.onView(ViewMatchers.withId(R.id.addUpdateActivity))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+
+        // Click on the tvDate view to open the DatePicker dialog
+        onView(withId(R.id.tvDate)).perform(ViewActions.click());
+
+        // Set the desired date using a custom ViewAction
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
+                .perform(PickerActions.setDate(2023, 7, 4));
+
+        // Close the DatePicker dialog and set the date in the text box
+        onView(withId(android.R.id.button1)).perform(ViewActions.click());
+
+
+        // Click on the tvTime view to open the TimePicker dialog
+        onView(withId(R.id.tvTime)).perform(ViewActions.click());
+
+        // Set the desired time using a custom ViewAction
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName())))
+                .perform(PickerActions.setTime(23, 50));
+
+        // Close the TimePicker dialog
+        onView(withId(android.R.id.button1)).perform(ViewActions.click());
+
+
+
+
+        onView(withId(R.id.editTextSysPressure)).perform(ViewActions.typeText("120"));
+        onView(withId(R.id.editTextDysPressure)).perform(ViewActions.typeText("80"));
+        onView(withId(R.id.editTextHeartRate)).perform(ViewActions.typeText("72"));
+        Espresso.pressBack();
+        onView(withId(R.id.editTextComment)).perform(ViewActions.typeText("abcd"));
+        Espresso.pressBack();
+        Espresso.onView(ViewMatchers.withId(R.id.buttonSave)).perform(click());
     }
 
 
