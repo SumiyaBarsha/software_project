@@ -83,7 +83,7 @@ public class SignUp_activity extends AppCompatActivity {
                 } else if (newPass.isEmpty()) {
                     sPass.setError("Field can't be empty!");
                 } else if (newPass.length() < 6) {
-                    sPass.setError("Enter at least 8 characters or digits!!");
+                    sPass.setError("Enter at least 6 characters or digits!!");
                 } else if (newConfirmPass.isEmpty()) {
                     sConfirmpass.setError("Field can't be empty!");
                 } else if (newHeight.isEmpty()) {

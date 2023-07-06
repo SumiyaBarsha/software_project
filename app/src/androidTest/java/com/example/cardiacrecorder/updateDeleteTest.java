@@ -43,14 +43,36 @@ public class updateDeleteTest {
     @Test
     public  void testUpdateRecord(){
 
-        SystemClock.sleep(5000);
+        //SystemClock.sleep(2000);
         // Perform a click action on the floating action button
         Espresso.onView(withId(R.id.rvList)).perform(longClick());
         SystemClock.sleep(1000);
 
+// Click on the view to open the DatePicker dialog
+        Espresso.onView(withId(R.id.tvDate)).perform(ViewActions.click());
+
+        // Set the desired date using DatePickerActions
+        Espresso.onView(withClassName(Matchers.equalTo(DatePicker.class.getName())))
+                .perform(PickerActions.setDate(2023, Calendar.JULY, 4));
+
+        // Close the DatePicker dialog by clicking the "OK" button
+        onView(withText("OK")).perform(ViewActions.click());
+
+        // Verify the selected date is displayed in the input field
+        onView(withId(R.id.tvDate)).check(matches(withText("04/07/2023")));
+
+        // Click on the tvTime view to open the TimePicker dialog
+        onView(withId(R.id.tvTime)).perform(ViewActions.click());
+
+        // Set the desired time using a custom ViewAction
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName())))
+                .perform(PickerActions.setTime(23, 50));
+
+        // Close the TimePicker dialog
+        onView(withId(android.R.id.button1)).perform(ViewActions.click());
 
 
-       // Update the values of other fields
+        // Update the values of other fields
         onView(withId(R.id.editTextSysPressure)).perform(clearText()).perform(typeText("130"));
         onView(withId(R.id.editTextDysPressure)).perform(clearText()).perform(typeText("85"));
         onView(withId(R.id.editTextHeartRate)).perform(clearText()).perform(typeText("75"));
@@ -67,11 +89,9 @@ public class updateDeleteTest {
      */
     @Test
     public void testDeleteMeasurement(){
-        SystemClock.sleep(5000);
         Espresso.onView(withId(R.id.rvList)).perform(longClick());
         SystemClock.sleep(1000);
         onView(withId(R.id.tvDelete)).perform(click());
-        SystemClock.sleep(5000);
     }
 
 
