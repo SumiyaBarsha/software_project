@@ -20,7 +20,7 @@ Here are some screenshots of <b>Cardiac Recorder</b> App:
 ![rsz_logout](https://github.com/SumiyaBarsha/software_project/assets/74502973/d6a4e710-ebdf-438c-ba28-3481d169210b)
 <br>
 <br>
-<h1>Mock Up :</h1>
+<h1>Mock Up & Storyboarding :</h1>
 
 ![rsz_sumiyabarshasoftware_project1](https://github.com/SumiyaBarsha/software_project/assets/74502973/922a5121-8524-4fd5-8486-170c1aa37521)
 
